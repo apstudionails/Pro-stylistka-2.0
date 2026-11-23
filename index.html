@@ -5,12 +5,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PRO STYLISTKA 2.0 — Formularz Zgłoszeniowy | AP Studio</title>
-  <!-- Google Fonts: Cormorant Garamond dla eleganckiego nagłówka oraz Plus Jakarta Sans dla czytelnych pól -->
+  <!-- Czcionki Google Fonts: Cormorant Garamond (nagłówki) i Plus Jakarta Sans (interfejs) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    /* Paleta kolorów i zmienne projektowe AP Studio (pudrowy róż + złoto) */
+    /* Zmienne kolorystyczne AP Studio: pudrowy róż, głębokie wino i złoto */
     :root {
       --pink-bg: #f6dbe6;
       --pink-soft: #fcebf2;
@@ -25,7 +25,7 @@
       --line: #dec6d1;
     }
 
-    /* Reset bazowy i bezpieczne pudełkowanie elementów */
+    /* Reset i bezpieczne pudełkowanie elementów */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -39,7 +39,7 @@
       overflow-x: hidden;
     }
 
-    /* Tło z pudrowym różem i subtelnymi złotymi oraz różanymi poświatami */
+    /* Tło z subtelnymi złotymi i różanymi poświatami */
     body {
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       color: var(--ink);
@@ -53,7 +53,7 @@
       align-items: flex-start;
     }
 
-    /* Zewnętrzna karta / rama w stylu AP Studio */
+    /* Główna karta w stylu AP Studio */
     .page-shell {
       width: 100%;
       max-width: 780px;
@@ -64,7 +64,7 @@
       padding: 26px 22px 34px;
     }
 
-    /* Sekcja nagłówkowa z pieczęcią AP STUDIO i tytułem */
+    /* Nagłówek z odznaką AP STUDIO */
     .top-brand {
       display: flex;
       flex-direction: column;
@@ -74,8 +74,8 @@
     }
 
     .brand-seal {
-      width: 78px;
-      height: 78px;
+      width: 76px;
+      height: 76px;
       border-radius: 50%;
       background: #ffffff;
       border: 2px solid var(--gold);
@@ -90,7 +90,7 @@
 
     .brand-seal .ap {
       font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 25px;
+      font-size: 24px;
       font-weight: 700;
       line-height: 1;
       color: var(--btn-dark);
@@ -116,21 +116,21 @@
     }
 
     .form-tag {
-      margin-top: 7px;
+      margin-top: 6px;
       font-size: 11px;
       font-weight: 800;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--btn-dark);
-      background: rgba(255, 255, 255, 0.88);
-      border: 1px solid rgba(201, 154, 62, 0.55);
-      padding: 5px 14px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(201, 154, 62, 0.5);
+      padding: 4px 12px;
       border-radius: 999px;
     }
 
-    /* Wewnętrzna karta formularza */
+    /* Kontener pól formularza */
     .form-card {
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.94);
       border: 1.5px solid rgba(201, 154, 62, 0.45);
       border-radius: 16px;
       padding: 22px 20px 26px;
@@ -139,14 +139,13 @@
       gap: 16px;
     }
 
-    /* Siatka dwukolumnowa na szerszych ekranach */
     .row-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
     }
 
-    /* Dostosowanie do wąskich ekranów (mobilnych) */
+    /* Responsywność dla urządzeń mobilnych */
     @media (max-width: 600px) {
       .page-shell {
         padding: 20px 12px 26px;
@@ -202,12 +201,12 @@
     }
 
     textarea {
-      min-height: 78px;
+      min-height: 76px;
       resize: vertical;
       line-height: 1.45;
     }
 
-    /* Grupa opcji wielokrotnego wyboru (radio) */
+    /* Opcje jednokrotnego wyboru */
     .options-box {
       display: flex;
       flex-direction: column;
@@ -234,7 +233,7 @@
       flex-shrink: 0;
     }
 
-    /* Checkbox zgody */
+    /* Zgoda na kontakt */
     .consent-row {
       display: flex;
       align-items: flex-start;
@@ -252,7 +251,7 @@
       flex-shrink: 0;
     }
 
-    /* Przycisk główny na samym dole */
+    /* Przycisk wysyłki zgłoszenia */
     .submit-btn {
       margin-top: 6px;
       width: 100%;
@@ -268,18 +267,19 @@
       text-transform: uppercase;
       cursor: pointer;
       box-shadow: 0 10px 22px rgba(77, 31, 51, 0.25);
-      transition: background 0.2s ease, transform 0.1s ease;
+      transition: background 0.2s ease, opacity 0.2s ease;
     }
 
-    .submit-btn:hover {
+    .submit-btn:hover:not(:disabled) {
       background: linear-gradient(135deg, var(--btn-hover) 0%, #833256 100%);
     }
 
-    .submit-btn:active {
-      transform: translateY(1px);
+    .submit-btn:disabled {
+      opacity: 0.65;
+      cursor: wait;
     }
 
-    /* Komunikat zwrotny / potwierdzenie na ekranie */
+    /* Komunikaty statusu (walidacja, wysyłka, potwierdzenie, błąd) */
     .notice {
       display: none;
       padding: 14px 16px;
@@ -294,17 +294,11 @@
     .notice.show {
       display: block;
     }
-
-    .notice.error {
-      background: #fff0f5;
-      border-color: #b83b6a;
-      color: #5c1831;
-    }
   </style>
 </head>
 <body>
   <main class="page-shell">
-    <!-- Nagłówek z pieczęcią AP STUDIO i tytułem programu -->
+    <!-- Nagłówek z pieczęcią AP STUDIO i nazwą programu -->
     <header class="top-brand">
       <div class="brand-seal" aria-hidden="true">
         <span class="ap">AP</span>
@@ -314,9 +308,9 @@
       <div class="form-tag">FORMULARZ ZGŁOSZENIOWY</div>
     </header>
 
-    <!-- Główny formularz zgłoszeniowy -->
+    <!-- Formularz zgłoszeniowy -->
     <form id="proStylistkaForm" class="form-card" novalidate>
-      <!-- 1. Imię i Nazwisko -->
+      <!-- Imię i nazwisko -->
       <div class="row-2">
         <div class="field">
           <label for="imie" class="field-label">Imię<span class="req">*</span></label>
@@ -328,7 +322,7 @@
         </div>
       </div>
 
-      <!-- 2. Numer telefonu i Adres e-mail -->
+      <!-- Telefon i adres e-mail -->
       <div class="row-2">
         <div class="field">
           <label for="telefon" class="field-label">Numer telefonu<span class="req">*</span></label>
@@ -340,64 +334,67 @@
         </div>
       </div>
 
-      <!-- 3. Dotychczasowe szkolenia lub kursy -->
+      <!-- Doświadczenie i dotychczasowe szkolenia -->
       <div class="field">
         <label for="szkolenia" class="field-label">Jakie szkolenia lub kursy ze stylizacji paznokci masz już za sobą?<span class="req">*</span></label>
-        <textarea
-          id="szkolenia"
-          name="szkolenia"
-          placeholder="Napisz krótko o swoich szkoleniach lub doświadczeniu..."
-          required
-        ></textarea>
+        <textarea id="szkolenia" name="szkolenia" placeholder="Napisz krótko o swoich szkoleniach lub doświadczeniu..." required></textarea>
       </div>
 
-      <!-- 4. Dostęp do komputera oraz czas i gotowość na regularną pracę i praktykę -->
+      <!-- Dostęp do komputera i gotowość na praktykę -->
       <div class="field">
         <span class="field-label">Czy masz dostęp do komputera oraz czas i gotowość na regularną pracę i praktykę?<span class="req">*</span></span>
         <div class="options-box" role="radiogroup" aria-label="Czy masz dostęp do komputera oraz czas i gotowość na regularną pracę i praktykę?">
           <label class="option-item">
-            <input type="radio" name="gotowosc" value="Tak — mam komputer oraz czas i gotowość na regularną pracę i praktykę" required />
+            <input type="radio" name="gotowosc" value="Tak — mam komputer i czas na regularną praktykę" required />
             <span>Tak — mam dostęp do komputera oraz czas i gotowość na regularną pracę i praktykę.</span>
           </label>
           <label class="option-item">
-            <input type="radio" name="gotowosc" value="Mam komputer, ale potrzebuję dopasować grafik pod regularną praktykę" />
+            <input type="radio" name="gotowosc" value="Mam komputer, muszę dopasować grafik" />
             <span>Mam dostęp do komputera, ale potrzebuję dopasować grafik pod regularną praktykę.</span>
           </label>
           <label class="option-item">
-            <input type="radio" name="gotowosc" value="Nie mam obecnie warunków lub czasu na regularną praktykę" />
+            <input type="radio" name="gotowosc" value="Nie mam obecnie warunków na regularną praktykę" />
             <span>Nie mam obecnie warunków lub czasu na regularną praktykę.</span>
           </label>
         </div>
       </div>
 
-      <!-- 5. Checkbox zgody na kontakt -->
+      <!-- Zgoda na kontakt -->
       <label class="consent-row">
         <input id="zgoda" name="zgoda" type="checkbox" required />
         <span>Wyrażam zgodę na kontakt w sprawie zapisu na listę oczekujących programu Pro Stylistka 2.0 prowadzonego przez AP Studio.</span>
       </label>
 
-      <!-- Komunikat walidacji lub potwierdzenia wysłania -->
+      <!-- Komunikat dla użytkownika -->
       <div id="formStatus" class="notice" role="status" aria-live="polite"></div>
 
-      <!-- 6. Wyrazisty przycisk na samym dole -->
-      <button type="submit" class="submit-btn">ZAPISZ MNIE NA LISTĘ OCZEKUJĄCYCH</button>
+      <!-- Przycisk zapisu -->
+      <button type="submit" id="submitBtn" class="submit-btn">ZAPISZ MNIE NA LISTĘ OCZEKUJĄCYCH</button>
     </form>
   </main>
 
   <script>
-    /**
-     * Obsługa walidacji wymaganych pól, formatu adresu e-mail
-     * oraz wyświetlanie komunikatu potwierdzenia na ekranie (bez alert()).
-     */
     (function () {
-      try {
-        var form = document.getElementById('proStylistkaForm');
-        var statusBox = document.getElementById('formStatus');
-        if (!form || !statusBox) return;
+      // Adres endpointu Formspree obsługujący zgłoszenia na skrzynkę odbiorczą
+      var ENDPOINT_URL = 'https://formspree.io/f/mgakprka';
+      var form = document.getElementById('proStylistkaForm');
+      var statusBox = document.getElementById('formStatus');
+      var submitBtn = document.getElementById('submitBtn');
+      if (!form || !statusBox || !submitBtn) return;
 
-        form.addEventListener('submit', function (event) {
-          event.preventDefault();
+      /**
+       * Wyświetla komunikat statusu w dedykowanym boksie pod formularzem.
+       * @param {string} message - Treść komunikatu w języku polskim.
+       */
+      function showStatus(message) {
+        statusBox.textContent = message;
+        statusBox.classList.add('show');
+      }
 
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        try {
           var imie = document.getElementById('imie').value.trim();
           var nazwisko = document.getElementById('nazwisko').value.trim();
           var telefon = document.getElementById('telefon').value.trim();
@@ -406,39 +403,67 @@
           var gotowosc = form.querySelector('input[name="gotowosc"]:checked');
           var zgoda = document.getElementById('zgoda').checked;
 
-          statusBox.classList.add('show');
-
-          // Sprawdzenie, czy wszystkie wymagane pola są wypełnione
+          // Walidacja kompletności wymaganych pól oraz zgody
           if (!imie || !nazwisko || !telefon || !email || !szkolenia || !gotowosc || !zgoda) {
-            statusBox.classList.add('error');
-            statusBox.textContent = 'Uzupełnij wszystkie wymagane pola oraz zaznacz zgodę na kontakt.';
+            showStatus('Uzupełnij wszystkie wymagane pola oraz zaznacz zgodę na kontakt.');
             return;
           }
 
-          // Sprawdzenie podstawowego formatu adresu e-mail
-          var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          if (!emailRegex.test(email)) {
-            statusBox.classList.add('error');
-            statusBox.textContent = 'Podaj poprawny adres e-mail (np. anna@apstudio.pl).';
+          // Walidacja podstawowego formatu adresu e-mail
+          if (email.indexOf('@') === -1 || email.indexOf('.') === -1) {
+            showStatus('Podaj poprawny adres e-mail.');
             return;
           }
 
-          // Czytelny komunikat potwierdzenia na ekranie
-          statusBox.classList.remove('error');
-          statusBox.textContent =
-            'Dziękujemy, ' +
-            imie +
-            ' ' +
-            nazwisko +
-            '! Twoje zgłoszenie na listę oczekujących programu Pro Stylistka 2.0 (AP Studio) zostało potwierdzone na ekranie dla adresu ' +
-            email +
-            '.';
+          submitBtn.disabled = true;
+          showStatus('Wysyłanie zgłoszenia...');
 
-          form.reset();
-        });
-      } catch (err) {
-        // Bezpieczne wyciszenie ewentualnych błędów skryptu na starszych przeglądarkach
-      }
+          var payload = {
+            imie: imie,
+            nazwisko: nazwisko,
+            telefon: telefon,
+            email: email,
+            szkolenia: szkolenia,
+            gotowosc: gotowosc.value,
+            zgoda: 'Tak'
+          };
+
+          fetch(ENDPOINT_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          })
+            .then(function (response) {
+              if (!response.ok) {
+                throw new Error('Błąd wysyłki zgłoszenia');
+              }
+              showStatus(
+                'Dziękujemy, ' +
+                  imie +
+                  ' ' +
+                  nazwisko +
+                  '. Zgłoszenie na listę oczekujących Pro Stylistka 2.0 zostało wysłane.'
+              );
+              form.reset();
+            })
+            .catch(function () {
+              showStatus(
+                'Nie udało się wysłać zgłoszenia. Spróbuj ponownie za chwilę lub sprawdź konfigurację adresu odbiorczego.'
+              );
+            })
+            .finally(function () {
+              submitBtn.disabled = false;
+            });
+        } catch (err) {
+          submitBtn.disabled = false;
+          showStatus(
+            'Nie udało się wysłać zgłoszenia. Spróbuj ponownie za chwilę lub sprawdź konfigurację adresu odbiorczego.'
+          );
+        }
+      });
     })();
   </script>
 </body>
