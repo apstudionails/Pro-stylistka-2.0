@@ -1,0 +1,446 @@
+```html
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PRO STYLISTKA 2.0 — Formularz Zgłoszeniowy | AP Studio</title>
+  <!-- Google Fonts: Cormorant Garamond dla eleganckiego nagłówka oraz Plus Jakarta Sans dla czytelnych pól -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* Paleta kolorów i zmienne projektowe AP Studio (pudrowy róż + złoto) */
+    :root {
+      --pink-bg: #f6dbe6;
+      --pink-soft: #fcebf2;
+      --pink-frame: #f2cade;
+      --white: #ffffff;
+      --ink: #2a1720;
+      --muted: #674957;
+      --gold: #c99a3e;
+      --gold-light: #edd08c;
+      --btn-dark: #4d1f33;
+      --btn-hover: #642843;
+      --line: #dec6d1;
+    }
+
+    /* Reset bazowy i bezpieczne pudełkowanie elementów */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      overflow-x: hidden;
+    }
+
+    /* Tło z pudrowym różem i subtelnymi złotymi oraz różanymi poświatami */
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(237, 208, 140, 0.45), transparent 40%),
+        radial-gradient(circle at bottom right, rgba(242, 202, 222, 0.75), transparent 45%),
+        var(--pink-bg);
+      padding: 28px 14px 56px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    /* Zewnętrzna karta / rama w stylu AP Studio */
+    .page-shell {
+      width: 100%;
+      max-width: 780px;
+      background: linear-gradient(180deg, #fcebf2 0%, #f5d6e4 100%);
+      border: 2px solid var(--gold-light);
+      border-radius: 22px;
+      box-shadow: 0 24px 60px rgba(84, 29, 54, 0.16);
+      padding: 26px 22px 34px;
+    }
+
+    /* Sekcja nagłówkowa z pieczęcią AP STUDIO i tytułem */
+    .top-brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .brand-seal {
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid var(--gold);
+      box-shadow: 0 8px 20px rgba(201, 154, 62, 0.22);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      padding: 6px;
+    }
+
+    .brand-seal .ap {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 25px;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--btn-dark);
+    }
+
+    .brand-seal .studio {
+      font-size: 8.5px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 2px;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+      color: var(--ink);
+      text-transform: uppercase;
+    }
+
+    .form-tag {
+      margin-top: 7px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--btn-dark);
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(201, 154, 62, 0.55);
+      padding: 5px 14px;
+      border-radius: 999px;
+    }
+
+    /* Wewnętrzna karta formularza */
+    .form-card {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1.5px solid rgba(201, 154, 62, 0.45);
+      border-radius: 16px;
+      padding: 22px 20px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Siatka dwukolumnowa na szerszych ekranach */
+    .row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    /* Dostosowanie do wąskich ekranów (mobilnych) */
+    @media (max-width: 600px) {
+      .page-shell {
+        padding: 20px 12px 26px;
+      }
+
+      .form-card {
+        padding: 18px 14px 22px;
+      }
+
+      .row-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field-label {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.35;
+    }
+
+    .req {
+      color: #b83b6a;
+      margin-left: 2px;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 11px 13px;
+      font-family: inherit;
+      font-size: 14px;
+      color: var(--ink);
+      background: #ffffff;
+      border: 1.2px solid var(--line);
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201, 154, 62, 0.18);
+    }
+
+    textarea {
+      min-height: 78px;
+      resize: vertical;
+      line-height: 1.45;
+    }
+
+    /* Grupa opcji wielokrotnego wyboru (radio) */
+    .options-box {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 10px 12px;
+      background: #fff9fb;
+      border: 1px solid #ecd6e0;
+      border-radius: 10px;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      font-size: 13px;
+      line-height: 1.4;
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .option-item input {
+      margin-top: 2px;
+      accent-color: var(--btn-dark);
+      flex-shrink: 0;
+    }
+
+    /* Checkbox zgody */
+    .consent-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      font-size: 12px;
+      line-height: 1.45;
+      color: var(--muted);
+      cursor: pointer;
+      padding-top: 2px;
+    }
+
+    .consent-row input {
+      margin-top: 2px;
+      accent-color: var(--btn-dark);
+      flex-shrink: 0;
+    }
+
+    /* Przycisk główny na samym dole */
+    .submit-btn {
+      margin-top: 6px;
+      width: 100%;
+      padding: 15px 18px;
+      border: 1px solid var(--gold-light);
+      border-radius: 9px;
+      background: linear-gradient(135deg, var(--btn-dark) 0%, #6e2947 100%);
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 10px 22px rgba(77, 31, 51, 0.25);
+      transition: background 0.2s ease, transform 0.1s ease;
+    }
+
+    .submit-btn:hover {
+      background: linear-gradient(135deg, var(--btn-hover) 0%, #833256 100%);
+    }
+
+    .submit-btn:active {
+      transform: translateY(1px);
+    }
+
+    /* Komunikat zwrotny / potwierdzenie na ekranie */
+    .notice {
+      display: none;
+      padding: 14px 16px;
+      border-radius: 10px;
+      background: #fff6e5;
+      border: 1.5px solid var(--gold);
+      color: var(--ink);
+      font-size: 13.5px;
+      line-height: 1.5;
+    }
+
+    .notice.show {
+      display: block;
+    }
+
+    .notice.error {
+      background: #fff0f5;
+      border-color: #b83b6a;
+      color: #5c1831;
+    }
+  </style>
+</head>
+<body>
+  <main class="page-shell">
+    <!-- Nagłówek z pieczęcią AP STUDIO i tytułem programu -->
+    <header class="top-brand">
+      <div class="brand-seal" aria-hidden="true">
+        <span class="ap">AP</span>
+        <span class="studio">STUDIO</span>
+      </div>
+      <h1>PRO STYLISTKA 2.0</h1>
+      <div class="form-tag">FORMULARZ ZGŁOSZENIOWY</div>
+    </header>
+
+    <!-- Główny formularz zgłoszeniowy -->
+    <form id="proStylistkaForm" class="form-card" novalidate>
+      <!-- 1. Imię i Nazwisko -->
+      <div class="row-2">
+        <div class="field">
+          <label for="imie" class="field-label">Imię<span class="req">*</span></label>
+          <input id="imie" name="imie" type="text" placeholder="Wpisz imię" required />
+        </div>
+        <div class="field">
+          <label for="nazwisko" class="field-label">Nazwisko<span class="req">*</span></label>
+          <input id="nazwisko" name="nazwisko" type="text" placeholder="Wpisz nazwisko" required />
+        </div>
+      </div>
+
+      <!-- 2. Numer telefonu i Adres e-mail -->
+      <div class="row-2">
+        <div class="field">
+          <label for="telefon" class="field-label">Numer telefonu<span class="req">*</span></label>
+          <input id="telefon" name="telefon" type="tel" placeholder="+48 000 000 000" required />
+        </div>
+        <div class="field">
+          <label for="email" class="field-label">Adres e-mail<span class="req">*</span></label>
+          <input id="email" name="email" type="email" placeholder="twoj@email.pl" required />
+        </div>
+      </div>
+
+      <!-- 3. Dotychczasowe szkolenia lub kursy -->
+      <div class="field">
+        <label for="szkolenia" class="field-label">Jakie szkolenia lub kursy ze stylizacji paznokci masz już za sobą?<span class="req">*</span></label>
+        <textarea
+          id="szkolenia"
+          name="szkolenia"
+          placeholder="Napisz krótko o swoich szkoleniach lub doświadczeniu..."
+          required
+        ></textarea>
+      </div>
+
+      <!-- 4. Dostęp do komputera oraz czas i gotowość na regularną pracę i praktykę -->
+      <div class="field">
+        <span class="field-label">Czy masz dostęp do komputera oraz czas i gotowość na regularną pracę i praktykę?<span class="req">*</span></span>
+        <div class="options-box" role="radiogroup" aria-label="Czy masz dostęp do komputera oraz czas i gotowość na regularną pracę i praktykę?">
+          <label class="option-item">
+            <input type="radio" name="gotowosc" value="Tak — mam komputer oraz czas i gotowość na regularną pracę i praktykę" required />
+            <span>Tak — mam dostęp do komputera oraz czas i gotowość na regularną pracę i praktykę.</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="gotowosc" value="Mam komputer, ale potrzebuję dopasować grafik pod regularną praktykę" />
+            <span>Mam dostęp do komputera, ale potrzebuję dopasować grafik pod regularną praktykę.</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="gotowosc" value="Nie mam obecnie warunków lub czasu na regularną praktykę" />
+            <span>Nie mam obecnie warunków lub czasu na regularną praktykę.</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- 5. Checkbox zgody na kontakt -->
+      <label class="consent-row">
+        <input id="zgoda" name="zgoda" type="checkbox" required />
+        <span>Wyrażam zgodę na kontakt w sprawie zapisu na listę oczekujących programu Pro Stylistka 2.0 prowadzonego przez AP Studio.</span>
+      </label>
+
+      <!-- Komunikat walidacji lub potwierdzenia wysłania -->
+      <div id="formStatus" class="notice" role="status" aria-live="polite"></div>
+
+      <!-- 6. Wyrazisty przycisk na samym dole -->
+      <button type="submit" class="submit-btn">ZAPISZ MNIE NA LISTĘ OCZEKUJĄCYCH</button>
+    </form>
+  </main>
+
+  <script>
+    /**
+     * Obsługa walidacji wymaganych pól, formatu adresu e-mail
+     * oraz wyświetlanie komunikatu potwierdzenia na ekranie (bez alert()).
+     */
+    (function () {
+      try {
+        var form = document.getElementById('proStylistkaForm');
+        var statusBox = document.getElementById('formStatus');
+        if (!form || !statusBox) return;
+
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
+
+          var imie = document.getElementById('imie').value.trim();
+          var nazwisko = document.getElementById('nazwisko').value.trim();
+          var telefon = document.getElementById('telefon').value.trim();
+          var email = document.getElementById('email').value.trim();
+          var szkolenia = document.getElementById('szkolenia').value.trim();
+          var gotowosc = form.querySelector('input[name="gotowosc"]:checked');
+          var zgoda = document.getElementById('zgoda').checked;
+
+          statusBox.classList.add('show');
+
+          // Sprawdzenie, czy wszystkie wymagane pola są wypełnione
+          if (!imie || !nazwisko || !telefon || !email || !szkolenia || !gotowosc || !zgoda) {
+            statusBox.classList.add('error');
+            statusBox.textContent = 'Uzupełnij wszystkie wymagane pola oraz zaznacz zgodę na kontakt.';
+            return;
+          }
+
+          // Sprawdzenie podstawowego formatu adresu e-mail
+          var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(email)) {
+            statusBox.classList.add('error');
+            statusBox.textContent = 'Podaj poprawny adres e-mail (np. anna@apstudio.pl).';
+            return;
+          }
+
+          // Czytelny komunikat potwierdzenia na ekranie
+          statusBox.classList.remove('error');
+          statusBox.textContent =
+            'Dziękujemy, ' +
+            imie +
+            ' ' +
+            nazwisko +
+            '! Twoje zgłoszenie na listę oczekujących programu Pro Stylistka 2.0 (AP Studio) zostało potwierdzone na ekranie dla adresu ' +
+            email +
+            '.';
+
+          form.reset();
+        });
+      } catch (err) {
+        // Bezpieczne wyciszenie ewentualnych błędów skryptu na starszych przeglądarkach
+      }
+    })();
+  </script>
+</body>
+</html>
+```
